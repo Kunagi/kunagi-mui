@@ -1,12 +1,12 @@
 (ns build
+  (:refer-clojure :exclude [update])
   (:require
    [clojure.tools.build.api :as b]
-   [kunagi.core.build :as kunagi-build]
 
-   [kunagi.secrets.purpose]
+   [kunagi.mui.build :as mui]
+
    ))
 
-(defn readme
+(defn update
   [{:keys []}]
-  (kunagi-build/write-readme-md!)
-  )
+  (mui/update-package-json!))
