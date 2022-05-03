@@ -1,0 +1,26 @@
+;; shadow-cljs configuration
+{:deps true
+
+ :nrepl {:port 55555}
+
+ :dev-http {50005 {:roots ["resources/public"
+                           "target/public"]}}
+
+ :builds
+ {:spa {:target           :browser
+        :output-dir       "target/public/js/spa"
+        :asset-path       "/js/spa"
+        :modules          {:main {:init-fn kunagi.mui.showcase.main/main!}}
+        :compiler-options {:infer-externs :auto
+                           :warnings-as-errors true
+                           :global-goog-object&array true}
+        :devtools         {:repl-pprint     true
+                           :reload-strategy :full
+                           :preloads        []}
+
+        :dev {:compiler-options {:output-feature-set :es6}}
+
+        :release {:compiler-options {:source-map     true
+                                     :checked-arrays true
+                                     ;; :optimizations  :simple
+                                     }}}}}
