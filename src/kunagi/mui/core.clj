@@ -1,5 +1,6 @@
 (ns kunagi.mui.core
   (:require
+   [clojure.string :as str]
    [helix.core :as helix]
    [helix.hooks :as helix-hooks]))
 
@@ -86,3 +87,65 @@
        ~params
        ~opts
        ~@body)))
+
+;; * HTML Helpers
+
+(defn- conform-style-value [v]
+  (cond
+    (vector? v)  (->> v (map conform-style-value) (str/join " "))
+    (string? v)  v
+    (keyword? v) (name v)
+    :else        v))
+
+(defn- conform-style [styles]
+  (reduce (fn [styles [k v]]
+            (assoc styles k (conform-style-value v)))
+          {} styles))
+
+(defn html-element
+  ([element style-and-children]
+   (html-element element style-and-children nil nil))
+  ([element style-and-children extra-class extra-style]
+   (let [[style children] (if (-> style-and-children first map?)
+                            [(first style-and-children) (rest style-and-children)]
+                            [nil style-and-children])
+
+         style (if extra-style
+                 (merge extra-style style)
+                 style)
+
+         props         {}
+         [props style] (if-let [k (-> style :key)]
+                         [(assoc props :key k) (dissoc style :key)]
+                         [props style])
+         [props style] (if-let [id (-> style :id)]
+                         [(assoc props :id id) (dissoc style :id)]
+                         [props style])
+         [props style] (if-let [k (-> style :ref)]
+                         [(assoc props :ref k) (dissoc style :ref)]
+                         [props style])
+         [props style] (if-let [v (-> style :tab-index)]
+                         [(assoc props :tab-index v) (dissoc style :tab-index)]
+                         [props style])
+         [props style] (if-let [v (-> style :on-click)]
+                         [(assoc props :onClick v) (dissoc style :on-click)]
+                         [props style])
+         [props style] (if-let [v (-> style :onKeyDown)]
+                         [(assoc props :onKeyDown v) (dissoc style :onKeyDown)]
+                         [props style])
+         [props style] (if-let [v (-> style :onKeyPress)]
+                         [(assoc props :onKeyPress v) (dissoc style :onKeyPress)]
+                         [props style])
+         [props style] (if-let [class (if extra-class
+                                        (str extra-class " " (-> style :class))
+                                        (-> style :class))]
+                         [(assoc props :className class) (dissoc style :class)]
+                         [props style])
+         props         (assoc props :style (conform-style style))]
+     `($ ~element ~props ~@children))))
+
+(defmacro div [& style-and-children]
+  (html-element :div style-and-children))
+
+(defmacro span [& style-and-children]
+  (html-element :span style-and-children))

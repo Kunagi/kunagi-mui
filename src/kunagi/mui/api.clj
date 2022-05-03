@@ -12,3 +12,5 @@
 (defmacro use-memo [& body] `(core/use-memo ~@body))
 
 (defmacro def-ui [& body] `(core/def-ui ~@body))
+(defmacro div [& body] `(core/div ~@body))
+(defmacro span [& body] `(core/span ~@body))

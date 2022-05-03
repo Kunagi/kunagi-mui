@@ -5,7 +5,9 @@
    [kunagi.mui.api :as ui :refer [$ def-ui]]))
 
 (def-ui App [title]
-  ($ :div title))
+  (ui/div
+   {:color "blue"}
+   title))
 
 ;; (defnc Test [context]
 ;;   ($))
