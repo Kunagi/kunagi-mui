@@ -3,10 +3,15 @@
   (:require
    [clojure.tools.build.api :as b]
 
-   [kunagi.mui.build :as mui]
+   [kunagi.build.api :as kb :refer [print-task print-done print-debug]]
 
+   [kunagi.mui.build :as mui]
    ))
 
 (defn update
   [{:keys []}]
   (mui/update-package-json!))
+
+(defn release [{:keys []}]
+  (kb/release! {})
+  )
