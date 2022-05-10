@@ -4,7 +4,7 @@
 
 
          ;; io.github.kunagi/kunagi-utils {:git/sha "e57e8ea78bab04e04347de0a46b7ab4bf6367e1a"}
-         io.github.kunagi/kunagi-utils {:local/root "../kunagi-utils"}
+         io.github.kunagi/kunagi-utils {:local/root "/p/kunagi-utils"}
 
          ;; io.github.kunagi/kunagi-build {:git/sha "79bf7fc4e252d62cdbe013471103c4a73f3320dd"}
          ;; io.github.kunagi/kunagi-build {:local/root "../kunagi-build"}
@@ -16,7 +16,7 @@
   :build {:paths ["src"]
           :deps {;;
                  ;; io.github.kunagi/kunagi-build {:git/sha "79bf7fc4e252d62cdbe013471103c4a73f3320dd"}
-                 io.github.kunagi/kunagi-build {:local/root "../kunagi-build"}
+                 io.github.kunagi/kunagi-build {:local/root "/p/kunagi-build"}
                  ;; io.github.clojure/tools.build {:git/tag "v0.8.1" :git/sha "7d40500"}
                  ;;
                  }
