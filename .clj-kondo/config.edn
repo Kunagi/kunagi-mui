@@ -1,6 +1,2 @@
 {:lint-as {
-           ;;
-           kunagi.mui.core/def-ui clojure.core/defn
-           kunagi.mui.api/def-ui clojure.core/defn
-           ;;
            }}
