@@ -1,1 +1,1 @@
-{:version {:major 0, :minor 0, :bugfix 2}, :git/tag "v0.0.2", :git/sha "8661d426e9a154b92f5e59e0c9564add634c33d3"}
+{:version {:major 0, :minor 0, :bugfix 3}, :git/tag "v0.0.3", :git/sha "6f4cbb1dcc97b11c7d05a2f29923ab39d3ee3cf2"}
