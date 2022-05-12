@@ -10,9 +10,11 @@
 (def atom-hook core/atom-hook)
 (def create-ref core/create-ref)
 (def mount core/mount)
+(def data core/data)
+(def DEBUG core/DEBUG)
 
 (core/def-ui AppWrapper [theme children]
-  (assert theme)
+  (assert (map? theme))
   (core/<>
    (core/$ mui/CssBaseline {:enableColorScheme true})
    (core/$ mui/ThemeProvider {:theme (-> theme clj->js mui/createTheme)}
