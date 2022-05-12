@@ -14,3 +14,10 @@
 (defmacro def-ui [& body] `(core/def-ui ~@body))
 (defmacro div [& body] `(core/div ~@body))
 (defmacro span [& body] `(core/span ~@body))
+
+(defmacro stack [& children] `($ mui/Stack {:spacing 1} ~@children))
+(defmacro stack-0 [& children] `($ mui/Stack {:spacing 0} ~@children))
+(defmacro stack-1 [& children] `($ mui/Stack {:spacing 1} ~@children))
+(defmacro stack-2 [& children] `($ mui/Stack {:spacing 2} ~@children))
+(defmacro stack-3 [& children] `($ mui/Stack {:spacing 3} ~@children))
+(defmacro stack-4 [& children] `($ mui/Stack {:spacing 4} ~@children))

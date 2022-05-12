@@ -13,6 +13,9 @@
 (def data core/data)
 (def DEBUG core/DEBUG)
 
+(defn use-atom [ATOM]
+  ((atom-hook ATOM)))
+
 (core/def-ui AppWrapper [theme children]
   (assert (map? theme))
   (<>
