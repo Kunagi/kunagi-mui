@@ -7,14 +7,12 @@
    [kunagi.mui.core :as core]))
 
 (def memo core/memo)
+(def use-atom core/use-atom)
 (def atom-hook core/atom-hook)
 (def create-ref core/create-ref)
 (def mount core/mount)
 (def data core/data)
 (def DEBUG core/DEBUG)
-
-(defn use-atom [ATOM]
-  ((atom-hook ATOM)))
 
 (core/def-ui AppWrapper [theme children]
   (assert (map? theme))

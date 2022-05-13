@@ -16,24 +16,33 @@
 (def create-ref react/createRef)
 (def memo helix/memo)
 
+(defn use-atom
+  ([ATOM]
+   (use-atom ATOM identity))
+  ([ATOM transformator]
+   (let [[value set-value] (use-state @ATOM)
+         watch-key (random-uuid)]
+
+     (use-effect
+      :once
+      (let [ACTIVE (volatile! true)]
+        (set-value @ATOM)
+        (add-watch ATOM watch-key
+                   (fn [_k _r ov nv]
+                     (when @ACTIVE
+                       (when-not (= ov nv)
+                         (set-value nv)))))
+        (fn []
+          (vreset! ACTIVE false)
+          (remove-watch ATOM watch-key))))
+
+     (transformator value))))
+
 (defn atom-hook_
   ([ATOM]
    (atom-hook_ ATOM identity))
   ([ATOM transformator]
-   (fn use-atom []
-     (let [[value set-value] (use-state @ATOM)
-           watch-key (random-uuid)]
-
-       (use-effect
-        :once
-        (set-value @ATOM)
-        (add-watch ATOM watch-key
-                   (fn [_k _r ov nv]
-                     (when-not (= ov nv)
-                       (set-value nv))))
-        #(remove-watch ATOM watch-key))
-
-       (transformator value)))))
+   (partial use-atom ATOM transformator)))
 
 (def atom-hook atom-hook_ #_(memoize atom-hook_))
 
