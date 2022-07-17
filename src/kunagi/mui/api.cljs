@@ -14,6 +14,8 @@
 (def data core/data)
 (def DEBUG core/DEBUG)
 
+(def Stack mui/Stack)
+
 (core/def-ui AppWrapper [theme children]
   (assert (map? theme))
   (<>
