@@ -180,3 +180,5 @@
             (.. this -props -children)
             ($ CollapsedError
                {:error (.. this -state -error)}))))
+#_(def-ui ErrorBoundary [children]
+  children)
