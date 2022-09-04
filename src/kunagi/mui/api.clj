@@ -21,3 +21,5 @@
 (defmacro stack-2 [& children] `($ Stack {:spacing 2} ~@children))
 (defmacro stack-3 [& children] `($ Stack {:spacing 3} ~@children))
 (defmacro stack-4 [& children] `($ Stack {:spacing 4} ~@children))
+
+(defmacro flex [& children] `($ Stack {:spacing 1 :direction "row"} ~@children))
