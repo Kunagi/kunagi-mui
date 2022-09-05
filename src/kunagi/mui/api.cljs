@@ -4,6 +4,7 @@
    ["@mui/material" :as mui]
    ["react-router-dom" :as router]
 
+   [kunagi.utils.debug :as debug]
    [kunagi.mui.core :as core]))
 
 (def memo core/memo)
@@ -24,3 +25,22 @@
       ($ router/BrowserRouter
          ($ core/ErrorBoundary
             children)))))
+
+(defn DEBUG_
+  ([value]
+   (DEBUG_ "?" value))
+  ([label value]
+   (let [[expanded? set-expanded] (core/use-state false)]
+     (when (debug/active?)
+       ($ :div
+          {:style {:font-size "10px"
+                   :background-color "black"
+                   :color "#AFA"
+                   :padding "3px"
+                   :cursor "pointer"
+                   :border-radius "5px"}
+           :onClick #(set-expanded (not expanded?))}
+          ($ :div
+             "[debug: " label "]")
+          (when expanded?
+            (data value)))))))
