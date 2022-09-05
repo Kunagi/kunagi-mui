@@ -1,5 +1,5 @@
 (ns kunagi.mui.api
-  (:require-macros [kunagi.mui.api :refer [$ <>]])
+  (:require-macros [kunagi.mui.api :refer [$ <> def-ui]])
   (:require
    ["@mui/material" :as mui]
    ["react-router-dom" :as router]
@@ -26,21 +26,25 @@
          ($ core/ErrorBoundary
             children)))))
 
+(def-ui Debug [label value]
+  (let [[expanded? set-expanded] (core/use-state false)]
+    (when (debug/active?)
+      ($ :div
+         {:style {:font-size "10px"
+                  :background-color "black"
+                  :color "#AFA"
+                  :padding "3px"
+                  :cursor "pointer"
+                  :border-radius "5px"}
+          :onClick #(set-expanded (not expanded?))}
+         ($ :div
+            "[debug: " label "]")
+         (when expanded?
+           (data value))))))
+
 (defn DEBUG_
   ([value]
    (DEBUG_ "?" value))
   ([label value]
-   (let [[expanded? set-expanded] (core/use-state false)]
-     (when (debug/active?)
-       ($ :div
-          {:style {:font-size "10px"
-                   :background-color "black"
-                   :color "#AFA"
-                   :padding "3px"
-                   :cursor "pointer"
-                   :border-radius "5px"}
-           :onClick #(set-expanded (not expanded?))}
-          ($ :div
-             "[debug: " label "]")
-          (when expanded?
-            (data value)))))))
+   (when (debug/active?)
+     ($ Debug {:label label :value value}))))
