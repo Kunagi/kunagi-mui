@@ -14,6 +14,7 @@
 (def mount core/mount)
 (def data core/data)
 (def DEBUG core/DEBUG)
+(def ErrorBoundary core/ErrorBoundary)
 
 (def Stack mui/Stack)
 
@@ -23,7 +24,7 @@
    ($ mui/CssBaseline {:enableColorScheme true})
    ($ mui/ThemeProvider {:theme (-> theme clj->js mui/createTheme)}
       ($ router/BrowserRouter
-         ($ core/ErrorBoundary
+         ($ ErrorBoundary
             children)))))
 
 (def-ui Debug [label value]
