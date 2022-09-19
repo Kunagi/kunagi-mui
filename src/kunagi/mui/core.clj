@@ -121,6 +121,9 @@
          [props style] (if-let [id (-> style :id)]
                          [(assoc props :id id) (dissoc style :id)]
                          [props style])
+         [props style] (if-let [k (-> style :sx)]
+                         [(assoc props :sx k) (dissoc style :sx)]
+                         [props style])
          [props style] (if-let [k (-> style :ref)]
                          [(assoc props :ref k) (dissoc style :ref)]
                          [props style])
