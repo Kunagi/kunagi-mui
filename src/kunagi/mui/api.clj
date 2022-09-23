@@ -10,6 +10,7 @@
 (defmacro use-state [& body] `(core/use-state ~@body))
 (defmacro use-effect [& body] `(core/use-effect ~@body))
 (defmacro use-memo [& body] `(core/use-memo ~@body))
+(defmacro use-ref [& body] `(core/use-ref ~@body))
 
 (defmacro def-ui [& body] `(core/def-ui ~@body))
 (defmacro div [& body] `(core/div ~@body))

@@ -35,6 +35,7 @@
 (defmacro use-state [& body] `(helix-hooks/use-state ~@body))
 (defmacro use-effect [& body] `(helix-hooks/use-effect ~@body))
 (defmacro use-memo [& body] `(helix-hooks/use-memo ~@body))
+(defmacro use-ref [& body] `(helix-hooks/use-ref ~@body))
 
 (defmacro def-ui [type params & body]
   (let [[docstring params body] (if (string? params)
