@@ -46,6 +46,19 @@
 
 (def atom-hook atom-hook_ #_(memoize atom-hook_))
 
+(defn use-promise
+  ([p]
+   (use-promise :once p))
+  ([effect-trigger-vector p]
+   (let [[result set-result] (use-state nil)]
+     (use-effect
+      effect-trigger-vector
+      (set-result nil)
+      (-> p
+          (.then set-result))
+      nil)
+     result)))
+
 (defn mount [component element-id]
   (assert (string? element-id))
   (assert component)
