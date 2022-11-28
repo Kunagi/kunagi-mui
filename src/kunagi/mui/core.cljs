@@ -54,8 +54,10 @@
      (use-effect
       effect-trigger-vector
       (set-result nil)
-      (-> p
-          (.then set-result))
+      (if p
+        (-> p
+            (.then set-result))
+        (set-result nil))
       nil)
      result)))
 
