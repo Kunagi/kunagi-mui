@@ -94,6 +94,10 @@
   (when (debug/active?)
     (apply data datas)))
 
+;; * react strict mode
+
+(def ReactStrictMode (-> react .-StrictMode))
+
 ;; * errors
 
 (defn- error-info-field [s v]

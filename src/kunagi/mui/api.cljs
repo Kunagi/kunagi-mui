@@ -16,6 +16,7 @@
 (def mount core/mount)
 (def data core/data)
 (def DEBUG core/DEBUG)
+(def ReactStrictMode core/ReactStrictMode)
 (def ErrorBoundary core/ErrorBoundary)
 
 (def Stack mui/Stack)
