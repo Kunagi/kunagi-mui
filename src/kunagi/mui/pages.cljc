@@ -57,4 +57,3 @@
          ;; (keyword schema-name "namespace") calling-namespace-name
            )
     (definitions/macro-gen-def sym opts  :kunagi.mui/page `init-page)))
-

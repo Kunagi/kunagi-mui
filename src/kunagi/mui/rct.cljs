@@ -6,6 +6,14 @@
    [kunagi.utils :as u]
    [kunagi.mui.api :as ui :refer [$ def-ui]]))
 
+(def-ui Data [value]
+  (ui/div
+   {:font-family :monospace
+    :font-style :normal
+    :white-space :pre-wrap}
+   (-> value u/->edn))
+  )
+
 (def-ui RctElement [element]
   (ui/stack
 
@@ -30,9 +38,8 @@
      (ui/div
       {:background-color (ui/color :green 9)
        :color "white"
-       :padding "4px 8px"
-       :font-family :monospace}
-      (-> value u/->edn)))
+       :padding "4px 8px"}
+      ($ Data {:value value})))
 
    ;; Eval Error
    (when-let [value (-> element :eval-error)]
