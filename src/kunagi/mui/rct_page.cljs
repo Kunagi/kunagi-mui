@@ -10,11 +10,19 @@
    [kunagi.mui.rct :as rct-ui]
    ))
 
-(def-ui Toc [rcts]
+(def-ui Toc [rcts current-test-id]
   (ui/stack
+   (ui/div
+    {:font-weight (when (= current-test-id "ALL")
+                    900)}
+    ($ ui/Link
+       {:href (str "/ui/rct?test=ALL")}
+       "ALL"))
    (for [t rcts]
      (ui/div
-      {:key (-> t :id)}
+      {:key (-> t :id)
+       :font-weight (when (-> t :id (= current-test-id))
+                      900)}
       ($ ui/Link
          {:href (str "/ui/rct?test=" (js/encodeURIComponent (-> t :id)))}
          (-> t :id))
@@ -43,11 +51,11 @@
                   reverse)
 
         test-id (ui/use-url-param :test)
-        rct (or (when test-id
-                  (->> rcts
-                       (filter #(-> % :id (= test-id)))
-                       first))
-                (first rcts))
+        rct (if test-id
+              (->> rcts
+                   (filter #(-> % :id (= test-id)))
+                   first)
+              (first rcts))
         ]
     (ui/stack
      ;; (ui/DEBUG test-id)
@@ -58,12 +66,21 @@
 
        :font-size "12px"}
       (ui/div
-       ($ Toc {:rcts rcts}))
+       ($ Toc {:rcts rcts
+               :current-test-id test-id}))
       (ui/div
-       (when rct
-         ($ Rct {:rct rct})))))))
 
-(def-page page
+       (when rct
+         ($ Rct {:rct rct}))
+
+       (when (= test-id "ALL")
+         (ui/stack
+          (for [rct (->> rcts)]
+            (ui/div
+             {:key (-> rct :id)}
+             ($ Rct {:rct rct}))))))))))
+
+(def-page page-2
   {:path ["rct"]
    :max-width false
    :content PageContent

@@ -76,7 +76,7 @@
    (for [element (->> rct :result :elements)]
      ($ RctElement {:key (-> element :id)
                     :element element}))
-   (ui/DEBUG rct)))
+   #_(ui/DEBUG rct)))
 
 
 (def-ui Debug []
