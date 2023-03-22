@@ -15,7 +15,7 @@
   )
 
 (def-ui RctElement [element]
-  (ui/stack
+  (ui/div
 
    ;; Binding and Expression
    (ui/div
