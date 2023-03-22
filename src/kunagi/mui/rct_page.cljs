@@ -15,7 +15,9 @@
    (for [t rcts]
      (ui/div
       {:key (-> t :id)}
-      (-> t :id)
+      ($ ui/Link
+         {:href (str "/ui/rct?test=" (js/encodeURIComponent (-> t :id)))}
+         (-> t :id))
       #_(ui/DEBUG t))))
   )
 
@@ -38,8 +40,17 @@
 (def-ui PageContent []
   (let [rcts-map (ui/use-atom rct/RCTS)
         rcts (->> rcts-map vals (sort-by :tsm-def-changed)
-                  reverse)]
+                  reverse)
+
+        test-id (ui/use-url-param :test)
+        rct (or (when test-id
+                  (->> rcts
+                       (filter #(-> % :id (= test-id)))
+                       first))
+                (first rcts))
+        ]
     (ui/stack
+     ;; (ui/DEBUG test-id)
      (ui/div
       {:display :grid
        :grid-template-columns "max-content auto"
@@ -49,11 +60,11 @@
       (ui/div
        ($ Toc {:rcts rcts}))
       (ui/div
-       (when-let [rct (first rcts)]
+       (when rct
          ($ Rct {:rct rct})))))))
 
 (def-page page
-  {:path "/ui/rct"
+  {:path ["rct"]
    :max-width false
    :content PageContent
    :title "Rich Comment Tests"})
