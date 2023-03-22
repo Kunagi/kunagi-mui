@@ -1,6 +1,6 @@
 {:paths ["src" "resources"]
  :deps  {
-         lilactown/helix {:mvn/version "0.1.5"}
+         lilactown/helix {:mvn/version "0.1.10"}
 
 
          io.github.kunagi/kunagi-utils {:git/sha "adb088af51599788eaa216d3e15011fd1847ec00", :git/tag "v0.1.17"}
