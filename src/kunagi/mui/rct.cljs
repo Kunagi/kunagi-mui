@@ -27,7 +27,10 @@
       :padding "4px 8px"}
      (-> element :bind-name))
     (ui/div
-     {:background-color (ui/color :blue-grey 9)
+     {:background-color (cond
+                          (-> element :eval-error) (ui/color :red 7)
+                          (-> element :expression first (= 'assert)) (ui/color :green 9)
+                          :else (ui/color :blue-grey 8))
       :color "white"
       :padding "4px 8px"
       :font-family :monospace}
@@ -36,7 +39,7 @@
    ;; Value
    (when-let [value (-> element :value)]
      (ui/div
-      {:background-color (ui/color :green 9)
+      {:background-color (ui/color :blue-grey 9)
        :color "white"
        :padding "4px 8px"}
       ($ Data {:value value})))
