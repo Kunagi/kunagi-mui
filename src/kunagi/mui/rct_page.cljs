@@ -28,7 +28,8 @@
     (ui/stack
      (-> rct :id)
      ($ mui/Divider)
-     ($ rct-ui/Rct {:rct evaled-rct}))))
+     ($ rct-ui/Rct {:rct (or evaled-rct
+                             (assoc rct :evaluating? true))}))))
 
 
 (rct dummy-2

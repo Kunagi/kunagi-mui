@@ -58,6 +58,21 @@
 
 (def-ui Rct [rct]
   (ui/stack
+
+   (when (-> rct :evaluating?)
+     (ui/div
+
+       ($ mui/LinearProgress)
+      (ui/div
+       {:background-color (ui/color :blue 8)
+        :color "white"
+        :padding "4px 8px"}
+       (ui/div
+        {:display :flex
+         :place-content :center})
+       ($ Data {:value (-> rct :bindings-form)})
+       )))
+
    (for [element (->> rct :result :elements)]
      ($ RctElement {:key (-> element :id)
                     :element element}))
