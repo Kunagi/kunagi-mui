@@ -5,9 +5,13 @@
 
          io.github.kunagi/kunagi-utils {:git/sha "b47f86f19a548c8bf781c61a3d9a7fa6beda7850", :git/tag "v0.1.20"}
 
+
          ;; io.github.kunagi/kunagi-build {:git/sha "79bf7fc4e252d62cdbe013471103c4a73f3320dd"}
          ;; io.github.kunagi/kunagi-build {:local/root "../kunagi-build"}
          ;;
+
+         camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.3"}
+
          }
 
  :aliases
