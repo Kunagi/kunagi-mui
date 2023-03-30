@@ -1,8 +1,8 @@
 (ns kunagi.mui.pages
   #?(:cljs (:require-macros [kunagi.mui.pages :refer [def-page]]))
   (:require
-   [clojure.string :as str]
    [camel-snake-kebab.core :as csk]
+   [clojure.string :as str]
    [kunagi.utils.definitions :as definitions]))
 
 (defn pages []

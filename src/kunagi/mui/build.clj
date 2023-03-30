@@ -1,7 +1,6 @@
 (ns kunagi.mui.build
   (:require
-   [kunagi.build.api :as build :refer [print-task print-done print-debug]]
-   ))
+   [kunagi.build.api :as build :refer [print-task]]))
 
 (defn update-package-json! []
   (print-task "package.json")

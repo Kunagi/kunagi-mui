@@ -1,14 +1,10 @@
 (ns kunagi.mui.rct-page
   (:require
    ["@mui/material" :as mui]
-
-   [kunagi.utils.rct :as rct :refer [rct]]
-
-   [kunagi.mui.api :as ui :refer [def-ui $ <>]]
+   [kunagi.mui.api :as ui :refer [$ def-ui]]
    [kunagi.mui.pages :refer [def-page]]
-
    [kunagi.mui.rct :as rct-ui]
-   ))
+   [kunagi.utils.rct :as rct :refer [rct]]))
 
 (def-ui Toc [rcts current-test-id]
   (ui/stack

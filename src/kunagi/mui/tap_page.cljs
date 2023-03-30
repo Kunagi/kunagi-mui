@@ -1,14 +1,7 @@
 (ns kunagi.mui.tap-page
   (:require
-   ["@mui/material" :as mui]
-
-   [kunagi.utils.rct :as rct :refer [rct]]
-
-   [kunagi.mui.api :as ui :refer [def-ui $ <>]]
+   [kunagi.mui.api :as ui :refer [$ def-ui]]
    [kunagi.mui.pages :refer [def-page]]
-
-   [kunagi.mui.rct :as rct-ui]
-
    [tick.core :as tick]))
 
 (defonce TAPS (atom nil))
