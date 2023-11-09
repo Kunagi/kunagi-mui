@@ -183,7 +183,20 @@
                {:style {:text-decoration "underline"
                         :text-align "center"
                         :display "block"}}
-               "Details..."))))))
+               "Details...")))
+       ($ :div
+          ($ :center
+             ($ :a
+                {:onClick #(js/window.location.reload)
+                 :style {:text-align "center"
+                         :display "block"
+                         :background-color "darkgreen"
+                         :color "white"
+                         :padding 4
+                         :border-radius "4px"
+                         :font-weight "bold"
+                         :max-width "200px"}}
+                "Seite neu laden"))))))
 
 (defcomponent ErrorBoundary
   (constructor [this]
