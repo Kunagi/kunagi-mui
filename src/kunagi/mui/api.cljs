@@ -23,6 +23,8 @@
 
 (def Stack mui/Stack)
 
+(def debug? debug/active?)
+
 (core/def-ui AppWrapper [theme children]
   (assert (map? theme))
   (<>
