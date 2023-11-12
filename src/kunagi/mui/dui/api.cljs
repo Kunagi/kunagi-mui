@@ -210,3 +210,7 @@
      {:class "DialogFaciliator"}
      (>dialog (assoc current-dialog
                      :exec-f exec)))))
+
+;;; state
+
+(defonce STATE (atom {:dialogs {}}))
