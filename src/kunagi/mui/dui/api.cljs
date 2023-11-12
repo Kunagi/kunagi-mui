@@ -31,7 +31,7 @@
 
 (defn >row [row dialog]
   (ui/div
-   {;:border "1px solid #555"
+   {                                    ;:border "1px solid #555"
     ;; :border-radius 4
     ;; :padding "4px 8px"
     }
@@ -44,11 +44,16 @@
    ;; cells
    (when-let [cells (-> row :cells seq)]
      (ui/div
-      {:display :grid
-       :grid-template-columns (str (->> (repeat (count cells) "max-content ")
-                                      (apply str))
-                             "auto")
-       :grid-gap 4}
+      {
+       ;; :display :grid
+       ;; :grid-template-columns (str (->> (repeat (count cells) "max-content ")
+                                        ;; (apply str))
+                                   ;; "auto")
+       ;; :grid-gap 4
+
+       :display :flex
+       :gap 4
+       }
       (for [cell cells]
         (ui/div
          {:key (-> cell :id)}
@@ -59,7 +64,9 @@
    {:border "1px solid black"
     :border-radius 4
     :background-color "#333" :color "#ddd"
-    :padding 8}
+    :padding 8
+
+    :word-break :break-word}
 
    (if (nil? dialog)
      (ui/div
@@ -68,6 +75,7 @@
       "loading...")
 
      (ui/stack-3
+
       (when-let [label (-> dialog :content-label)]
         (ui/div
          {:color "#999"}
@@ -138,11 +146,16 @@
 ;;; menu
 
 (defn ->cell-for-menu-item [item]
-  (->Cell 1
-          (str (or (-> item :label)
-                   (-> item :text)
-                   (-> item :id)))
-          (-> item :action)))
+  (let [action (or (-> item :action)
+                   (when-let [dialog (-> item :dialog)]
+                     (cond
+                       (instance? Dialog dialog) (fn []
+                                                   dialog))))]
+    (->Cell 1
+            (str (or (-> item :label)
+                     (-> item :text)
+                     (-> item :id)))
+            action)))
 
 (defn ->row-for-menu-item [item]
   (->Row (or (-> item :id)
@@ -173,7 +186,8 @@
 (defn ->dialog-for-action-result [result]
   (cond
 
-    #_(insta)
+    (instance? Dialog result)
+    result
 
     :else
     (->dialog-for-value-display result "action result")))
@@ -195,19 +209,22 @@
                                          d)))))]
 
     (ui/use-effect
-      [dialog]
-      (set-current-dialog dialog)
-      nil)
+     [dialog]
+     (set-current-dialog dialog)
+     nil)
 
     #_(ui/use-effect
-        [reference]
-        (when reference
-          (p/let [thing (ctx/resolve> reference)]
-            (set-dialog (->dialog thing))))
-        nil)
+       [reference]
+       (when reference
+         (p/let [thing (ctx/resolve> reference)]
+           (set-dialog (->dialog thing))))
+       nil)
 
     (ui/div
-     {:class "DialogFaciliator"}
+     {:class "DialogFaciliator"
+      ;; :max-width "100%"
+      ;; :overflow :auto
+      }
      (>dialog (assoc current-dialog
                      :exec-f exec)))))
 
