@@ -3,7 +3,7 @@
          lilactown/helix {:mvn/version "0.1.10"}
 
 
-         io.github.kunagi/kunagi-utils {:git/sha "f2c634f02c3f7b3da5c5d975149f55e7f92d1b3b", :git/tag "v0.1.44"}
+         io.github.kunagi/kunagi-utils {:git/sha "1f83c087e997e29d561613d6847a11238a82773d", :git/tag "v0.1.45"}
 
 
          ;; io.github.kunagi/kunagi-build {:git/sha "79bf7fc4e252d62cdbe013471103c4a73f3320dd"}
