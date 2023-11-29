@@ -91,7 +91,9 @@
 
 (defn DEBUG [& datas]
   (when (debug/active?)
-    (apply data datas)))
+    ($ :div
+       {:className "no-print"}
+       (apply data datas))))
 
 ;; * react strict mode
 
