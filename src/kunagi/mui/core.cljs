@@ -121,7 +121,9 @@
        (error-info-field
         "msg"
         ($ :div
-           {:style {:font-weight 900}}
+           {:style {:white-space "pre-wrap"
+                    :word-break "break-all"
+                    :font-family "monospace"}}
            (-> err :message)))
 
        (error-info-field "type" (str (-> err :type)))
@@ -167,7 +169,9 @@
         :onClick (when-not expanded
                    #(set-expanded true))}
        ($ :div
-          {:style {:text-align "center"}}
+          {:style {:text-align "center"
+                   :word-break "break-all"
+                   :white-space "pre-wrap"}}
           ($ :span
              {:style {:color "white"
                       :background-color "darkred"
@@ -176,7 +180,7 @@
              "Error")
           " "
           ($ :span
-             {:style {:font-weight 900}}
+             {:style {:font-weight "bold"}}
              (u/error-user-message err)))
        ($ :div
           (if expanded
