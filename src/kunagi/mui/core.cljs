@@ -7,6 +7,7 @@
   (:require
    ["react" :as react]
    ["react-dom" :as rdom]
+   [promesa.core :as p]
    [helix.core :as helix]
    [helix.hooks :as helix-hooks]
    [kunagi.utils :as u]
@@ -154,20 +155,59 @@
 
        #_(error-info-field "DATA" (data error)))))
 
+(defonce REPORT_ERROR_F (atom nil))
+
+(def-ui ErrorSubmission [error]
+  (let [[state set-state] (use-state nil)
+        submit-error @REPORT_ERROR_F]
+    (when submit-error
+      ($ :div
+         ($ :center
+            (case state
+
+              :submitted
+              ($ :div
+                 {:style {:color "darkorange"
+                          :padding 4
+                          :font-weight "bold"
+                          :max-width "200px"}}
+                 "Der Fehler wurde gemeldet. Vielen Dank!")
+
+              :submitting
+              ($ :div
+                 {:style {:color "darkorange"
+                          :padding 4
+                          :font-weight "bold"
+                          :max-width "200px"}}
+                 "Der Fehler wird gemeldet...")
+
+              ($ :a
+                 {:onClick (fn []
+                             (set-state :submitting)
+                             (p/let [_ (submit-error error)]
+                               (set-state :submitted)))
+                  :style {:cursor :pointer
+                          :text-align "center"
+                          :display "block"
+                          :background-color "darkorange"
+                          :color "white"
+                          :padding 4
+                          :border-radius "4px"
+                          :font-weight "bold"
+                          :max-width "200px"}}
+                 "Diesen Fehler melden")))))))
+
 (def-ui CollapsedError [error]
   (let [err (u/error->data error)
         [expanded set-expanded] (use-state false)]
     ($ :div
-       {:style {:cursor (when-not expanded :pointer)
-                :display "grid"
+       {:style {:display "grid"
                 :grid-gap "8px"
                 :background-color "white"
                 :color "black"
                 :padding "8px"
                 :border "2px solid darkred"
-                :border-radius "8px"}
-        :onClick (when-not expanded
-                   #(set-expanded true))}
+                :border-radius "8px"}}
        ($ :div
           {:style {:text-align "center"
                    :word-break "break-all"
@@ -182,19 +222,33 @@
           ($ :span
              {:style {:font-weight "bold"}}
              (u/error-user-message err)))
+
        ($ :div
           (if expanded
             ($ ErrorInfo {:error error})
-            ($ :a
-               {:style {:text-decoration "underline"
-                        :text-align "center"
-                        :display "block"}}
-               "Details...")))
+            ($ :div
+          ($ :center
+             ($ :a
+                {:onClick #(set-expanded true)
+                 :style {:cursor :pointer
+                         :text-align "center"
+                         :display "block"
+                         :background-color "darkgrey"
+                         :color "white"
+                         :padding 4
+                         :border-radius "4px"
+                         :font-weight "bold"
+                         :max-width "200px"}}
+                "Details anzeigen")))))
+
+       ($ ErrorSubmission {:error error})
+
        ($ :div
           ($ :center
              ($ :a
                 {:onClick #(js/window.location.reload)
-                 :style {:text-align "center"
+                 :style {:cursor :pointer
+                         :text-align "center"
                          :display "block"
                          :background-color "darkgreen"
                          :color "white"
