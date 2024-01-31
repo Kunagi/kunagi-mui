@@ -1,10 +1,6 @@
 {:paths ["src" "resources"]
  :deps  {
 
-         ;; https://github.com/lilactown/helix
-         lilactown/helix {:mvn/version "0.2.0"}
-
-
          io.github.kunagi/kunagi-utils {:git/sha "376930feb942b78521ca9538c4fdc7ebd808071c", :git/tag "v0.1.57"}
 
 
@@ -12,15 +8,18 @@
          ;; io.github.kunagi/kunagi-build {:local/root "../kunagi-build"}
          ;;
 
+         ;; https://github.com/lilactown/helix
+         lilactown/helix {:mvn/version "0.2.0"}
+
          ;; https://github.com/clj-commons/camel-snake-kebab
          camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.3"}
 
          }
 
  :aliases
- {;; Run with clj -T:build <function-in-build>
+ { ;; Run with clj -T:build <function-in-build>
   :build {:paths ["src"]
-          :deps {;;
+          :deps { ;;
                  ;; io.github.kunagi/kunagi-build {:git/sha "79bf7fc4e252d62cdbe013471103c4a73f3320dd"}
                  io.github.kunagi/kunagi-build {:local/root "/p/kunagi-build"}
                  ;; io.github.clojure/tools.build {:git/tag "v0.8.1" :git/sha "7d40500"}
@@ -28,7 +27,9 @@
                  }
           :ns-default build}
 
-  :test {:extra-deps {lambdaisland/kaocha {:mvn/version "1.66.1034"}}
+  :test {:extra-deps {
+                      ;; https://github.com/lambdaisland/kaocha
+                      lambdaisland/kaocha {:mvn/version "1.66.1034"}}
          :main-opts ["-m" "kaocha.runner"]}
 
   ;;
