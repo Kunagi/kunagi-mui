@@ -1,6 +1,8 @@
 {:paths ["src" "resources"]
  :deps  {
-         lilactown/helix {:mvn/version "0.1.10"}
+
+         ;; https://github.com/lilactown/helix
+         lilactown/helix {:mvn/version "0.2.0"}
 
 
          io.github.kunagi/kunagi-utils {:git/sha "9252ad6ea2d7d5483eca4efad6d34fe944116a19", :git/tag "v0.1.56"}
@@ -10,6 +12,7 @@
          ;; io.github.kunagi/kunagi-build {:local/root "../kunagi-build"}
          ;;
 
+         ;; https://github.com/clj-commons/camel-snake-kebab
          camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.3"}
 
          }
