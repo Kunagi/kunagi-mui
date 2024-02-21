@@ -78,6 +78,7 @@
               :font-size        "12px"
               :font-weight      400
               :font-style       "normal"
+              :text-transform   "none"
               :overflow         "auto"
               :width            "100%"
               :padding          "1rem"
