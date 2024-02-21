@@ -1,7 +1,7 @@
 {:paths ["src" "resources"]
  :deps  {
 
-         io.github.kunagi/kunagi-utils {:git/sha "035eb15720eaa3bc8fcbebf24419b9769d23d463", :git/tag "v0.1.60"}
+         io.github.kunagi/kunagi-utils {:git/sha "a4b4163f167610bee0c7cd5f3a123db5ec82ea7b", :git/tag "v0.1.61"}
 
 
          ;; io.github.kunagi/kunagi-build {:git/sha "79bf7fc4e252d62cdbe013471103c4a73f3320dd"}
